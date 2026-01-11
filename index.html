@@ -23,58 +23,93 @@
 
         .container {
             background: white;
-            border-radius: 16px;
+            border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             overflow: hidden;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px 20px;
+            padding: 40px 30px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 24px;
-            margin-bottom: 8px;
+            font-size: 28px;
+            margin-bottom: 10px;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         .header p {
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.95;
         }
 
         .progress-container {
-            background: #f3f4f6;
-            padding: 20px;
+            background: #f8f9fa;
+            padding: 25px 30px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .progress-text {
+            font-size: 14px;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .progress-count {
             font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 8px;
-            font-weight: 500;
+            color: #6c757d;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
         }
 
         .progress-bar {
-            background: #e5e7eb;
-            height: 8px;
-            border-radius: 4px;
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
             overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .progress-fill {
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             height: 100%;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
+            border-radius: 5px;
         }
 
         .content {
-            padding: 30px 20px;
+            padding: 40px 30px;
         }
 
         .question-screen {
@@ -83,50 +118,73 @@
 
         .question-screen.active {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
         .question-number {
             font-size: 14px;
             color: #667eea;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .question-text {
-            font-size: 18px;
-            color: #1f2937;
+            font-size: 20px;
+            color: #212529;
             line-height: 1.6;
-            margin-bottom: 30px;
-            font-weight: 500;
+            margin-bottom: 35px;
+            font-weight: 600;
         }
 
         .button-group {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             flex-direction: column;
         }
 
         .btn {
-            padding: 16px 24px;
+            padding: 18px 24px;
             border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             background: white;
             color: #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn:hover {
             background: #667eea;
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .btn-primary {
@@ -136,34 +194,35 @@
         }
 
         .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+            opacity: 0.95;
+            transform: translateY(-3px);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .form-group label {
             display: block;
             font-size: 14px;
-            color: #374151;
-            margin-bottom: 8px;
-            font-weight: 500;
+            color: #495057;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            padding: 14px 18px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
         }
 
         .form-group input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .result-screen {
@@ -171,53 +230,175 @@
         }
 
         .score-circle {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.5);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .score-number {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 700;
             color: white;
         }
 
+        .score-label {
+            font-size: 13px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
         .score-category {
-            font-size: 22px;
-            color: #1f2937;
+            font-size: 26px;
+            color: #212529;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            line-height: 1.3;
         }
 
         .score-recommendation {
-            font-size: 16px;
+            font-size: 18px;
             color: #667eea;
             font-weight: 600;
             margin-bottom: 30px;
         }
 
-        .user-info {
-            background: #f9fafb;
+        .result-brief {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: left;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-brief h3 {
+            font-size: 18px;
+            color: #212529;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .result-brief p {
+            font-size: 15px;
+            color: #495057;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .result-brief ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .result-brief li {
+            font-size: 14px;
+            color: #495057;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: white;
             padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 24px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         .user-info p {
             font-size: 14px;
-            color: #4b5563;
-            margin-bottom: 6px;
+            color: #6c757d;
+            margin-bottom: 8px;
         }
 
         .user-info strong {
-            color: #1f2937;
+            color: #212529;
+            font-weight: 600;
+        }
+
+        .intro-screen {
+            text-align: center;
+        }
+
+        .intro-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .intro-screen h2 {
+            font-size: 24px;
+            color: #212529;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .intro-screen p {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin: 25px 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .feature-item::before {
+            content: '✓';
+            color: #667eea;
+            font-weight: 700;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .cta-wrapper {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 20px 0 0 0;
+            border-top: 1px solid #e9ecef;
+            margin: 20px -30px -40px -30px;
+            padding: 20px 30px;
         }
 
         .hidden {
@@ -226,11 +407,11 @@
 
         @media (min-width: 768px) {
             .header h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .question-text {
-                font-size: 20px;
+                font-size: 22px;
             }
 
             .button-group {
@@ -239,6 +420,10 @@
 
             .btn {
                 flex: 1;
+            }
+
+            .content {
+                padding: 50px 40px;
             }
         }
     </style>
@@ -250,21 +435,42 @@
             <p>12-Point Retirement Readiness Assessment</p>
         </div>
 
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-text" id="progressText">Question 1 of 12</div>
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-info">
+                <div class="progress-text" id="progressText">Question 1 of 12</div>
+                <div class="progress-count" id="progressCount">1/12</div>
+            </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill" style="width: 8.33%"></div>
             </div>
         </div>
 
         <div class="content">
+            <!-- Intro Screen -->
+            <div id="introScreen" class="question-screen active intro-screen">
+                <div class="intro-icon">🎯</div>
+                <h2>Welcome to Your Retirement Readiness Assessment</h2>
+                <p>In the next few minutes, you'll discover exactly where you stand on your retirement journey.</p>
+                
+                <div class="feature-list">
+                    <div class="feature-item">12 critical questions designed by retirement planning experts</div>
+                    <div class="feature-item">Instant personalized score and detailed analysis</div>
+                    <div class="feature-item">Actionable recommendations based on your results</div>
+                    <div class="feature-item">Takes only 2-3 minutes to complete</div>
+                </div>
+
+                <p style="margin-top: 25px; color: #212529; font-weight: 600;">Ready to find out your Retirement Readiness Score?</p>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="startAssessment()">Start Assessment →</button>
+            </div>
+
             <!-- Questions -->
-            <div id="q1" class="question-screen active">
+            <div id="q1" class="question-screen">
                 <div class="question-number">Question 1 of 12</div>
                 <div class="question-text">Does your total retirement corpus today equal at least 25× your expected annual retirement expenses?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(1, 1)">YES</button>
-                    <button class="btn" onclick="answer(1, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(1, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(1, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -272,8 +478,8 @@
                 <div class="question-number">Question 2 of 12</div>
                 <div class="question-text">Do you have a separate liquid buffer equal to at least 5 years of expenses, kept aside from your main retirement investments?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(2, 1)">YES</button>
-                    <button class="btn" onclick="answer(2, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(2, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(2, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -281,8 +487,8 @@
                 <div class="question-number">Question 3 of 12</div>
                 <div class="question-text">Will your pension, rent, FD/annuity interest and other predictable income sources cover at least 40% of your expected monthly retirement expenses? (Example: If expenses are ₹50,000, predictable income should be ₹20,000 or more)</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(3, 1)">YES</button>
-                    <button class="btn" onclick="answer(3, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(3, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(3, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -290,8 +496,8 @@
                 <div class="question-number">Question 4 of 12</div>
                 <div class="question-text">Is less than 40% of your total net worth locked into one single asset class (property, business, one stock, etc.)?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(4, 1)">YES</button>
-                    <button class="btn" onclick="answer(4, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(4, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(4, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -299,8 +505,8 @@
                 <div class="question-number">Question 5 of 12</div>
                 <div class="question-text">Can you access at least 3 years of expenses within 30 days without penalties or forced selling?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(5, 1)">YES</button>
-                    <button class="btn" onclick="answer(5, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(5, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(5, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -308,8 +514,8 @@
                 <div class="question-number">Question 6 of 12</div>
                 <div class="question-text">Have you planned and calculated post-retirement tax impact on all your income streams?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(6, 1)">YES</button>
-                    <button class="btn" onclick="answer(6, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(6, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(6, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -317,8 +523,8 @@
                 <div class="question-number">Question 7 of 12</div>
                 <div class="question-text">Do you have a registered Will and correct nominations across all assets?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(7, 1)">YES</button>
-                    <button class="btn" onclick="answer(7, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(7, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(7, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -326,8 +532,8 @@
                 <div class="question-number">Question 8 of 12</div>
                 <div class="question-text">Do you follow a defined annual withdrawal rule instead of ad-hoc withdrawals?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(8, 1)">YES</button>
-                    <button class="btn" onclick="answer(8, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(8, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(8, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -335,8 +541,8 @@
                 <div class="question-number">Question 9 of 12</div>
                 <div class="question-text">Do you rebalance your portfolio at least once every year?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(9, 1)">YES</button>
-                    <button class="btn" onclick="answer(9, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(9, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(9, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -344,8 +550,8 @@
                 <div class="question-number">Question 10 of 12</div>
                 <div class="question-text">Will at least 40% of your retirement corpus remain invested in growth assets (equity-oriented) even after retirement?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(10, 1)">YES</button>
-                    <button class="btn" onclick="answer(10, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(10, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(10, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -353,8 +559,8 @@
                 <div class="question-number">Question 11 of 12</div>
                 <div class="question-text">Can your retirement plan remain independent without depending financially on your children or relatives?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(11, 1)">YES</button>
-                    <button class="btn" onclick="answer(11, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(11, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(11, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
@@ -362,43 +568,49 @@
                 <div class="question-number">Question 12 of 12</div>
                 <div class="question-text">Can your retirement plan comfortably manage a one-time unexpected financial event of ₹10–15 lakhs without disrupting long-term plans?</div>
                 <div class="button-group">
-                    <button class="btn" onclick="answer(12, 1)">YES</button>
-                    <button class="btn" onclick="answer(12, 0)">NO / NOT SURE</button>
+                    <button class="btn" onclick="answer(12, 1)">✓ YES</button>
+                    <button class="btn" onclick="answer(12, 0)">✗ NO / NOT SURE</button>
                 </div>
             </div>
 
             <!-- User Details Form -->
             <div id="userForm" class="question-screen">
-                <div class="question-number">Just a few details...</div>
-                <div class="question-text">Please provide your information to see your personalized results</div>
+                <div class="intro-icon">📋</div>
+                <div class="question-number">Almost There!</div>
+                <div class="question-text">We've analyzed your responses. Enter your details to see your personalized Retirement Readiness Score.</div>
                 <form onsubmit="submitForm(event)">
                     <div class="form-group">
                         <label for="userName">Full Name *</label>
-                        <input type="text" id="userName" required>
+                        <input type="text" id="userName" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
                         <label for="userPhone">Phone Number *</label>
-                        <input type="tel" id="userPhone" pattern="[0-9]{10}" required>
+                        <input type="tel" id="userPhone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
                     </div>
                     <div class="form-group">
                         <label for="userAge">Age *</label>
-                        <input type="number" id="userAge" min="45" max="100" required>
+                        <input type="number" id="userAge" placeholder="Your current age" min="45" max="100" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">View My Results</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">View My Retirement Readiness Score →</button>
                 </form>
             </div>
 
             <!-- Results Screen -->
             <div id="results" class="question-screen result-screen">
+                <div class="score-label">YOUR MRRS SCORE</div>
                 <div class="score-circle">
                     <div class="score-number" id="scoreNumber">0</div>
                 </div>
                 <div class="score-category" id="scoreCategory"></div>
                 <div class="score-recommendation" id="scoreRecommendation"></div>
                 
+                <div class="result-brief" id="resultBrief"></div>
+                
                 <div class="user-info" id="userInfoDisplay"></div>
                 
-                <button class="btn btn-primary" style="width: 100%;" onclick="requestReview()">Request My Retirement Readiness Review</button>
+                <div class="cta-wrapper">
+                    <button class="btn btn-primary" style="width: 100%;" onclick="requestReview()">📞 Request My Personalized Review</button>
+                </div>
             </div>
         </div>
     </div>
@@ -406,6 +618,12 @@
     <script>
         let answers = [];
         let userData = {};
+
+        function startAssessment() {
+            document.getElementById('introScreen').classList.remove('active');
+            document.getElementById('q1').classList.add('active');
+            document.getElementById('progressContainer').style.display = 'block';
+        }
 
         function answer(questionNum, value) {
             answers[questionNum - 1] = value;
@@ -425,6 +643,7 @@
             const progress = (questionNum / 12) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressText').textContent = 'Question ' + questionNum + ' of 12';
+            document.getElementById('progressCount').textContent = questionNum + '/12';
         }
 
         function submitForm(event) {
@@ -435,6 +654,70 @@
             userData.age = document.getElementById('userAge').value;
             
             calculateAndShowResults();
+        }
+
+        function getResultBrief(score) {
+            if (score <= 30) {
+                return {
+                    summary: "Your assessment reveals significant gaps in your retirement planning foundation that require immediate attention.",
+                    details: "A score in this range indicates that critical pillars of retirement security—such as corpus adequacy, liquidity buffers, and diversification—need substantial strengthening. The good news? Identifying these gaps now gives you time to course-correct.",
+                    nextSteps: [
+                        "Build a comprehensive retirement corpus calculation",
+                        "Establish emergency and liquidity buffers",
+                        "Create a diversified asset allocation strategy",
+                        "Set up proper legal documentation (Will, nominations)"
+                    ],
+                    urgency: "⚠️ Immediate action recommended"
+                };
+            } else if (score <= 50) {
+                return {
+                    summary: "You've made progress on retirement planning, but several key areas need strengthening to ensure long-term security.",
+                    details: "Your score shows that while you've started planning, there are gaps in areas like liquidity management, tax planning, or portfolio structure that could impact your retirement comfort. Addressing these now will significantly improve your retirement outcomes.",
+                    nextSteps: [
+                        "Enhance your emergency and liquid buffer reserves",
+                        "Review and optimize your asset allocation",
+                        "Implement a systematic withdrawal strategy",
+                        "Address tax efficiency across income streams"
+                    ],
+                    urgency: "📊 Strengthening needed"
+                };
+            } else if (score <= 70) {
+                return {
+                    summary: "You're on a solid path with good fundamentals in place, but targeted improvements will elevate your retirement readiness.",
+                    details: "Your planning demonstrates awareness of key retirement principles. Fine-tuning areas like withdrawal strategies, portfolio rebalancing, and ensuring adequate growth allocation will help you transition from 'good' to 'excellent' retirement preparedness.",
+                    nextSteps: [
+                        "Optimize your portfolio rebalancing strategy",
+                        "Fine-tune your equity allocation for growth",
+                        "Establish a formal withdrawal rule framework",
+                        "Review and update your estate planning documents"
+                    ],
+                    urgency: "✨ Enhancement opportunity"
+                };
+            } else if (score <= 85) {
+                return {
+                    summary: "Excellent work! You've built a strong retirement framework with most critical elements in place.",
+                    details: "Your score reflects disciplined planning and execution. You have solid corpus adequacy, diversification, and risk management. Small optimizations in areas like tax efficiency or portfolio fine-tuning can help you maximize your retirement outcomes.",
+                    nextSteps: [
+                        "Optimize tax efficiency across all income streams",
+                        "Fine-tune withdrawal strategies for longevity",
+                        "Consider legacy and estate planning enhancements",
+                        "Review insurance and healthcare coverage adequacy"
+                    ],
+                    urgency: "🎯 Optimization focus"
+                };
+            } else {
+                return {
+                    summary: "Outstanding! You've demonstrated exceptional retirement planning discipline with comprehensive coverage across all critical areas.",
+                    details: "Your score puts you in the top tier of retirement preparedness. You have robust corpus adequacy, strong liquidity, diversified assets, and systematic processes. At this stage, focus shifts to wealth preservation, legacy planning, and ensuring your plan adapts to changing circumstances.",
+                    nextSteps: [
+                        "Implement advanced tax optimization strategies",
+                        "Create comprehensive legacy and estate plans",
+                        "Consider philanthropic planning opportunities",
+                        "Establish regular plan review and adjustment protocols"
+                    ],
+                    urgency: "🏆 Preservation & legacy mode"
+                };
+            }
         }
 
         function calculateAndShowResults() {
@@ -459,10 +742,25 @@
                 category = 'Well-Prepared Retirement';
                 recommendation = 'Preservation & Legacy Planning';
             }
+
+            const brief = getResultBrief(score);
             
             document.getElementById('scoreNumber').textContent = score;
             document.getElementById('scoreCategory').textContent = category;
             document.getElementById('scoreRecommendation').textContent = recommendation;
+            
+            const nextStepsHTML = brief.nextSteps.map(step => `<li>${step}</li>`).join('');
+            
+            document.getElementById('resultBrief').innerHTML = `
+                <h3>📊 What Your Score Means</h3>
+                <p>${brief.summary}</p>
+                <p>${brief.details}</p>
+                <div class="highlight-box">
+                    <strong>${brief.urgency}</strong>
+                </div>
+                <h3 style="margin-top: 20px; font-size: 16px;">🎯 Recommended Next Steps:</h3>
+                <ul>${nextStepsHTML}</ul>
+            `;
             
             document.getElementById('userInfoDisplay').innerHTML = `
                 <p><strong>Name:</strong> ${userData.name}</p>
@@ -478,7 +776,20 @@
             const score = document.getElementById('scoreNumber').textContent;
             const category = document.getElementById('scoreCategory').textContent;
             
-            alert(`Thank you, ${userData.name}!\n\nYour MRRS Score: ${score}\nCategory: ${category}\n\nOur retirement planning expert will contact you at ${userData.phone} within 24 hours to discuss your personalized ${document.getElementById('scoreRecommendation').textContent}.`);
+            alert(`Thank you, ${userData.name}! 🎯
+
+Your MRRS Score: ${score}
+Category: ${category}
+
+Our certified retirement planning expert will contact you at ${userData.phone} within 24 hours to discuss your personalized ${document.getElementById('scoreRecommendation').textContent}.
+
+You'll receive:
+✓ Detailed analysis of your assessment
+✓ Customized action plan
+✓ Expert guidance on priority areas
+✓ No-obligation consultation
+
+We look forward to helping you secure your retirement future!`);
         }
     </script>
 </body>
