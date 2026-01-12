@@ -177,12 +177,15 @@
         .result-screen { padding: 0 !important; }
         
         .results-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px 30px 30px;
             text-align: center;
             margin: -40px -30px 0 -30px;
         }
+        
+        .hero-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .hero-yellow { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .hero-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
         
         .score-display {
             display: flex;
@@ -193,17 +196,23 @@
         }
         
         .score-circle {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             border: 3px solid rgba(255, 255, 255, 0.3);
         }
         
-        .score-number { font-size: 48px; font-weight: 700; color: white; }
+        .score-number { font-size: 52px; font-weight: 700; color: white; line-height: 1; }
+        .score-outof { font-size: 16px; color: white; opacity: 0.9; margin-top: 4px; }
+        
+        .score-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .score-yellow { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .score-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
         
         .score-info { text-align: left; flex: 1; max-width: 280px; }
         .score-label {
@@ -222,11 +231,14 @@
         
         .insight-card {
             background: #f8f9fa;
-            border-left: 4px solid #667eea;
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
+        
+        .insight-card.red { border-left: 4px solid #ef4444; }
+        .insight-card.yellow { border-left: 4px solid #f59e0b; }
+        .insight-card.green { border-left: 4px solid #10b981; }
         
         .insight-title {
             font-size: 16px;
@@ -321,7 +333,7 @@
                 <div class="progress-count" id="pCount">1/12</div>
             </div>
             <div class="progress-bar">
-                <div class="progress-fill" id="pFill" style="width: 8.33%"></div>
+                <div class="progress-fill" id="pFill"></div>
             </div>
         </div>
         
@@ -331,7 +343,7 @@
     <script>
         const app = document.getElementById('app');
         const progressBar = document.getElementById('progress');
-        let answers = [];
+        const answers = [];
         let userData = {};
         
         const questions = [
@@ -374,9 +386,9 @@
         
         function showQuestion(idx) {
             const qNum = idx + 1;
-            document.getElementById('pText').textContent = `Question ${qNum} of 12`;
-            document.getElementById('pCount').textContent = `${qNum}/12`;
-            document.getElementById('pFill').style.width = `${(qNum/12)*100}%`;
+            document.getElementById('pText').textContent = 'Question ' + qNum + ' of 12';
+            document.getElementById('pCount').textContent = qNum + '/12';
+            document.getElementById('pFill').style.width = ((qNum/12)*100) + '%';
             
             app.innerHTML = `
                 <div class="screen active">
@@ -436,88 +448,100 @@
         }
         
         function showResults() {
-            const total = answers.reduce((a,b) => a+b, 0);
+            const total = answers.reduce(function(a,b) { return a+b; }, 0);
             const score = Math.round(total * 8.33);
             
-            let cat, rec, content;
+            let cat, rec, content, colorClass, heroClass;
             
             if (score <= 30) {
-                cat = 'High Priority Review Required';
-                rec = 'Retirement Structuring Plan';
+                cat = 'Needs Urgent Attention';
+                rec = 'Complete Retirement Planning Required';
+                colorClass = 'red';
+                heroClass = 'hero-red';
                 content = {
-                    icon: '🎯',
-                    text: "Your retirement foundation needs immediate strengthening. You've identified critical gaps early—this is your advantage. With focused action on corpus building, liquidity reserves, and asset diversification, you can transform your retirement security.",
+                    icon: '⚠️',
+                    text: "Your retirement foundation needs immediate strengthening. You've identified critical gaps early—this is your advantage. With focused action on building your retirement fund, creating emergency reserves, and spreading your investments, you can secure your retirement.",
                     actions: [
-                        ['Build Corpus', 'Calculate and establish your 25x retirement target'],
-                        ['Create Buffers', 'Set up 5-year emergency liquid reserves'],
-                        ['Diversify Assets', 'Reduce concentration risk below 40%'],
-                        ['Legal Framework', 'Establish Will and asset nominations']
+                        ['Build Your Fund', 'Start saving 25x your yearly expenses'],
+                        ['Emergency Money', 'Keep 5 years of expenses in safe, liquid funds'],
+                        ['Spread Investments', 'Don\'t put more than 40% in one place'],
+                        ['Legal Documents', 'Create your Will and update nominees']
                     ]
                 };
             } else if (score <= 50) {
-                cat = 'Elevated Review Required';
-                rec = 'Retirement Strengthening Plan';
+                cat = 'Getting There, But Needs Work';
+                rec = 'Strengthen Your Retirement Plan';
+                colorClass = 'yellow';
+                heroClass = 'hero-yellow';
                 content = {
                     icon: '📈',
-                    text: "Your planning shows solid groundwork. Key areas like liquidity management, tax optimization, or portfolio structure need attention. Strengthening these elements now will significantly enhance your retirement confidence and financial resilience.",
+                    text: "You've made a good start with your retirement planning. However, key areas like emergency funds, tax planning, or investment mix need attention. Fixing these now will give you much better peace of mind and financial security in retirement.",
                     actions: [
-                        ['Boost Liquidity', 'Enhance emergency reserves to 5 years'],
-                        ['Optimize Assets', 'Review and rebalance asset allocation'],
-                        ['Withdrawal Strategy', 'Implement systematic withdrawal rules'],
-                        ['Tax Efficiency', 'Plan for post-retirement tax impact']
+                        ['Build Safety Net', 'Increase emergency funds to 5 years'],
+                        ['Balance Investments', 'Review and adjust your portfolio mix'],
+                        ['Plan Withdrawals', 'Set up a systematic withdrawal strategy'],
+                        ['Save on Taxes', 'Plan how to reduce tax on retirement income']
                     ]
                 };
             } else if (score <= 70) {
-                cat = 'Improvement Recommended';
-                rec = 'Retirement Enhancement Plan';
+                cat = 'On The Right Track';
+                rec = 'Fine-Tune Your Retirement Strategy';
+                colorClass = 'yellow';
+                heroClass = 'hero-yellow';
                 content = {
                     icon: '✨',
-                    text: "You've built strong fundamentals with smart planning decisions. Fine-tuning your withdrawal strategies, maintaining equity allocation for growth, and regular portfolio rebalancing will elevate you from good to exceptional retirement readiness.",
+                    text: "You've built a solid foundation with smart decisions. Fine-tuning how you withdraw money, keeping some investments growing, and regularly reviewing your portfolio will take you from good to excellent retirement readiness.",
                     actions: [
-                        ['Rebalancing', 'Set annual portfolio review schedule'],
-                        ['Growth Focus', 'Maintain 40%+ equity allocation'],
-                        ['Withdrawal Rules', 'Formalize systematic withdrawal plan'],
-                        ['Estate Planning', 'Update legal documentation']
+                        ['Annual Review', 'Check your investments once a year'],
+                        ['Keep Growing', 'Maintain 40%+ in growth investments'],
+                        ['Withdrawal Rules', 'Set up a clear withdrawal system'],
+                        ['Update Papers', 'Keep legal documents current']
                     ]
                 };
             } else if (score <= 85) {
-                cat = 'Generally Well-Prepared';
-                rec = 'Retirement Optimization Plan';
+                cat = 'Well Prepared';
+                rec = 'Optimize & Protect Your Retirement';
+                colorClass = 'green';
+                heroClass = 'hero-green';
                 content = {
                     icon: '🏆',
-                    text: "Excellent execution! Your retirement plan demonstrates discipline and comprehensive thinking. You have strong corpus adequacy, diversification, and risk management. Focus now shifts to optimization—tax efficiency, withdrawal fine-tuning, and legacy planning.",
+                    text: "Excellent work! Your retirement plan shows discipline and smart thinking. You have enough savings, good diversification, and proper risk management. Now focus on getting better returns, reducing taxes, making your corpus last longer, and protecting against inflation.",
                     actions: [
-                        ['Tax Optimization', 'Maximize post-retirement tax efficiency'],
-                        ['Withdrawal Fine-tuning', 'Optimize longevity strategies'],
-                        ['Legacy Planning', 'Enhance estate transfer strategies'],
-                        ['Healthcare Review', 'Validate insurance coverage adequacy']
+                        ['Better Returns', 'Improve investment performance safely'],
+                        ['Minimize Taxes', 'Optimize how much tax you\'ll pay'],
+                        ['Extend Corpus Life', 'Make your retirement fund last longer'],
+                        ['Inflation Protection', 'Ensure purchasing power stays strong']
                     ]
                 };
             } else {
-                cat = 'Well-Prepared Retirement';
-                rec = 'Preservation & Legacy Planning';
+                cat = 'Excellently Prepared';
+                rec = 'Preserve Wealth & Build Legacy';
+                colorClass = 'green';
+                heroClass = 'hero-green';
                 content = {
                     icon: '💎',
-                    text: "Outstanding achievement! You're in the top tier with comprehensive coverage across all critical retirement dimensions. Your focus is now on wealth preservation, advanced tax strategies, legacy planning, and ensuring your plan adapts to life's changes.",
+                    text: "Outstanding! You're among the best-prepared retirees. You've covered all critical areas comprehensively. Your focus now is on maximizing returns, ensuring your corpus lasts through market cycles, advanced tax optimization, and protecting your wealth for the long term.",
                     actions: [
-                        ['Tax Mastery', 'Implement advanced optimization'],
-                        ['Legacy Design', 'Create comprehensive estate plans'],
-                        ['Philanthropy', 'Explore charitable planning options'],
-                        ['Plan Reviews', 'Establish ongoing adjustment protocols']
+                        ['Maximize Returns', 'Optimize portfolio for better risk-adjusted returns'],
+                        ['Corpus Longevity', 'Ensure your money lasts 30+ years'],
+                        ['Advanced Tax Strategies', 'Use sophisticated tax-saving techniques'],
+                        ['Wealth Protection', 'Guard against inflation and market volatility']
                     ]
                 };
             }
             
-            const actionsHTML = content.actions.map(a => 
-                `<div class="action-item"><strong>${a[0]}</strong>${a[1]}</div>`
-            ).join('');
+            let actionsHTML = '';
+            for (let i = 0; i < content.actions.length; i++) {
+                actionsHTML += '<div class="action-item"><strong>' + content.actions[i][0] + '</strong>' + content.actions[i][1] + '</div>';
+            }
             
             app.innerHTML = `
                 <div class="screen active result-screen">
-                    <div class="results-hero">
+                    <div class="results-hero ${heroClass}">
                         <div class="score-display">
-                            <div class="score-circle">
+                            <div class="score-circle score-${colorClass}">
                                 <div class="score-number">${score}</div>
+                                <div class="score-outof">out of 100</div>
                             </div>
                             <div class="score-info">
                                 <div class="score-label">YOUR MRRS SCORE</div>
@@ -527,10 +551,10 @@
                         </div>
                     </div>
                     <div class="results-body">
-                        <div class="insight-card">
+                        <div class="insight-card ${colorClass}">
                             <div class="insight-title">
                                 <span>${content.icon}</span>
-                                <span>Your Retirement Status</span>
+                                <span>What This Means For You</span>
                             </div>
                             <p class="insight-text">${content.text}</p>
                         </div>
@@ -541,8 +565,8 @@
                             <div><div class="label">Age</div><div class="value">${userData.age}</div></div>
                         </div>
                         <div class="cta-section">
-                            <p>Our certified retirement expert will create a personalized action plan for you</p>
-                            <button class="btn btn-primary" style="width: 100%;" onclick="requestReview('${score}', '${rec}')">📞 Get My Personalized Review</button>
+                            <p>Our retirement planning expert will create a personalized action plan for you</p>
+                            <button class="btn btn-primary" style="width: 100%;" onclick="requestReview(${score}, '${rec}')">📞 Get My Personalized Review</button>
                         </div>
                     </div>
                 </div>
@@ -550,7 +574,7 @@
         }
         
         function requestReview(score, rec) {
-            alert(`Thank you, ${userData.name}! 🎯\n\nYour MRRS Score: ${score}\n\nOur certified retirement planning expert will contact you at ${userData.phone} within 24 hours.\n\nWhat you'll receive:\n✓ Detailed analysis of your 12-point assessment\n✓ Personalized ${rec}\n✓ Priority action roadmap\n✓ Expert guidance (no-obligation consultation)\n\nWe're committed to helping you achieve retirement confidence!`);
+            alert('Thank you, ' + userData.name + '! 🎯\n\nYour MRRS Score: ' + score + ' out of 100\n\nOur retirement planning expert will contact you at ' + userData.phone + ' within 24 hours.\n\nWhat you\'ll receive:\n✓ Detailed analysis of your 12-point assessment\n✓ Personalized ' + rec + '\n✓ Priority action roadmap\n✓ Expert guidance (no-obligation consultation)\n\nWe\'re committed to helping you achieve retirement confidence!');
         }
         
         showIntro();
