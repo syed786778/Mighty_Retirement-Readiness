@@ -108,6 +108,7 @@
             background: white;
             color: #667eea;
             transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .btn:hover {
@@ -115,6 +116,11 @@
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            background: #667eea;
+            color: white;
         }
         
         .btn-primary {
@@ -429,7 +435,7 @@
                         </div>
                         <div class="form-group">
                             <label>Age *</label>
-                            <input type="number" id="age" min="45" max="100" required>
+                            <input type="number" id="age" min="40" max="100" required>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">View My Retirement Readiness Score →</button>
                     </form>
@@ -565,8 +571,8 @@
                             <div><div class="label">Age</div><div class="value">${userData.age}</div></div>
                         </div>
                         <div class="cta-section">
-                            <p>Our retirement planning expert will create a personalized action plan for you</p>
-                            <button class="btn btn-primary" style="width: 100%;" onclick="requestReview(${score}, '${rec}')">📞 Get My Personalized Review</button>
+                            <p><strong>Get a FREE personalized roadmap</strong> to fix gaps, maximize returns, and retire confidently—built specifically for your situation</p>
+                            <button class="btn btn-primary" style="width: 100%;" onclick="requestReview(${score}, '${rec}')">📞 Get My FREE Retirement Roadmap</button>
                         </div>
                     </div>
                 </div>
