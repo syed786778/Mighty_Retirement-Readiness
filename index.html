@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mighty Retirement Readiness Score™</title>
+    <title>Mighty Retirement Readiness Score</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -235,6 +235,35 @@
         
         .results-body { padding: 30px; }
         
+        .stats-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .stats-banner h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .stats-banner p {
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        .stats-banner strong {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
         .insight-card {
             background: #f8f9fa;
             padding: 20px;
@@ -312,6 +341,78 @@
         
         .cta-section p { font-size: 14px; color: #495057; margin-bottom: 15px; font-weight: 500; }
         
+        .mighty-final {
+            text-align: center;
+            padding: 40px 30px;
+        }
+        
+        .mighty-logo {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .mighty-tagline {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        
+        .impact-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 15px;
+            color: #495057;
+            line-height: 1.5;
+        }
+        
+        .website-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .website-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .thank-you-note {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.7;
+        }
+        
         @media (max-width: 767px) {
             .score-display { flex-direction: column; gap: 20px; }
             .score-info { text-align: center; max-width: 100%; }
@@ -347,12 +448,12 @@
     </div>
     
     <script>
-        const app = document.getElementById('app');
-        const progressBar = document.getElementById('progress');
-        const answers = [];
-        let userData = {};
+        var app = document.getElementById('app');
+        var progressBar = document.getElementById('progress');
+        var answers = [];
+        var userData = {};
         
-        const questions = [
+        var questions = [
             "Does your total retirement corpus today equal at least 25× your expected annual retirement expenses?",
             "Do you have a separate liquid buffer equal to at least 5 years of expenses, kept aside from your main retirement investments?",
             "Will your pension, rent, FD/annuity interest and other predictable income sources cover at least 40% of your expected monthly retirement expenses? (Example: If expenses are ₹50,000, predictable income should be ₹20,000 or more)",
@@ -368,21 +469,19 @@
         ];
         
         function showIntro() {
-            app.innerHTML = `
-                <div class="screen active intro-screen">
-                    <div class="intro-icon">🎯</div>
-                    <h2>Welcome to Your Retirement Readiness Assessment</h2>
-                    <p>In the next few minutes, you'll discover exactly where you stand on your retirement journey.</p>
-                    <div class="feature-list">
-                        <div class="feature-item">12 critical questions designed by retirement planning experts</div>
-                        <div class="feature-item">Instant personalized score and detailed analysis</div>
-                        <div class="feature-item">Actionable recommendations based on your results</div>
-                        <div class="feature-item">Takes only 2-3 minutes to complete</div>
-                    </div>
-                    <p style="margin-top: 25px; color: #212529; font-weight: 600;">Ready to find out your Retirement Readiness Score?</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="startQuiz()">Start Assessment →</button>
-                </div>
-            `;
+            app.innerHTML = '<div class="screen active intro-screen">' +
+                '<div class="intro-icon">🎯</div>' +
+                '<h2>Welcome to Your Retirement Readiness Assessment</h2>' +
+                '<p>In the next few minutes, you will discover exactly where you stand on your retirement journey.</p>' +
+                '<div class="feature-list">' +
+                '<div class="feature-item">12 critical questions designed by retirement planning experts</div>' +
+                '<div class="feature-item">Instant personalized score and detailed analysis</div>' +
+                '<div class="feature-item">Actionable recommendations based on your results</div>' +
+                '<div class="feature-item">Takes only 2-3 minutes to complete</div>' +
+                '</div>' +
+                '<p style="margin-top: 25px; color: #212529; font-weight: 600;">Ready to find out your Retirement Readiness Score?</p>' +
+                '<button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="startQuiz()">Start Assessment →</button>' +
+                '</div>';
         }
         
         function startQuiz() {
@@ -391,21 +490,19 @@
         }
         
         function showQuestion(idx) {
-            const qNum = idx + 1;
+            var qNum = idx + 1;
             document.getElementById('pText').textContent = 'Question ' + qNum + ' of 12';
             document.getElementById('pCount').textContent = qNum + '/12';
             document.getElementById('pFill').style.width = ((qNum/12)*100) + '%';
             
-            app.innerHTML = `
-                <div class="screen active">
-                    <div class="question-number">Question ${qNum} of 12</div>
-                    <div class="question-text">${questions[idx]}</div>
-                    <div class="button-group">
-                        <button class="btn" onclick="answerQuestion(${idx}, 1)">✓ YES</button>
-                        <button class="btn" onclick="answerQuestion(${idx}, 0)">✗ NO / NOT SURE</button>
-                    </div>
-                </div>
-            `;
+            app.innerHTML = '<div class="screen active">' +
+                '<div class="question-number">Question ' + qNum + ' of 12</div>' +
+                '<div class="question-text">' + questions[idx] + '</div>' +
+                '<div class="button-group">' +
+                '<button class="btn" onclick="answerQuestion(' + idx + ', 1)">✓ YES</button>' +
+                '<button class="btn" onclick="answerQuestion(' + idx + ', 0)">✗ NO / NOT SURE</button>' +
+                '</div>' +
+                '</div>';
         }
         
         function answerQuestion(idx, val) {
@@ -419,28 +516,26 @@
         
         function showForm() {
             progressBar.style.display = 'none';
-            app.innerHTML = `
-                <div class="screen active">
-                    <div class="intro-icon">📋</div>
-                    <div class="question-number">Almost There!</div>
-                    <div class="question-text">We've analyzed your responses. Enter your details to see your personalized Retirement Readiness Score.</div>
-                    <form onsubmit="submitForm(event)">
-                        <div class="form-group">
-                            <label>Full Name *</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number *</label>
-                            <input type="tel" id="phone" pattern="[0-9]{10}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Age *</label>
-                            <input type="number" id="age" min="40" max="100" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">View My Retirement Readiness Score →</button>
-                    </form>
-                </div>
-            `;
+            app.innerHTML = '<div class="screen active">' +
+                '<div class="intro-icon">📋</div>' +
+                '<div class="question-number">Almost There!</div>' +
+                '<div class="question-text">We have analyzed your responses. Enter your details to see your personalized Retirement Readiness Score.</div>' +
+                '<form onsubmit="submitForm(event)">' +
+                '<div class="form-group">' +
+                '<label>Full Name *</label>' +
+                '<input type="text" id="name" required>' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Phone Number *</label>' +
+                '<input type="tel" id="phone" pattern="[0-9]{10}" required>' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Age *</label>' +
+                '<input type="number" id="age" min="40" max="100" required>' +
+                '</div>' +
+                '<button type="submit" class="btn btn-primary" style="width: 100%;">View My Retirement Readiness Score →</button>' +
+                '</form>' +
+                '</div>';
         }
         
         function submitForm(e) {
@@ -454,10 +549,13 @@
         }
         
         function showResults() {
-            const total = answers.reduce(function(a,b) { return a+b; }, 0);
-            const score = Math.round(total * 8.33);
+            var total = 0;
+            for (var i = 0; i < answers.length; i++) {
+                total += answers[i];
+            }
+            var score = Math.round(total * 8.33);
             
-            let cat, rec, content, colorClass, heroClass;
+            var cat, rec, content, colorClass, heroClass;
             
             if (score <= 30) {
                 cat = 'Needs Urgent Attention';
@@ -466,11 +564,11 @@
                 heroClass = 'hero-red';
                 content = {
                     icon: '⚠️',
-                    text: "Your retirement foundation needs immediate strengthening. You've identified critical gaps early—this is your advantage. With focused action on building your retirement fund, creating emergency reserves, and spreading your investments, you can secure your retirement.",
+                    text: 'Your retirement foundation needs immediate strengthening. You have identified critical gaps early—this is your advantage. With focused action on building your retirement fund, creating emergency reserves, and spreading your investments, you can secure your retirement.',
                     actions: [
                         ['Build Your Fund', 'Start saving 25x your yearly expenses'],
                         ['Emergency Money', 'Keep 5 years of expenses in safe, liquid funds'],
-                        ['Spread Investments', 'Don\'t put more than 40% in one place'],
+                        ['Spread Investments', 'Do not put more than 40% in one place'],
                         ['Legal Documents', 'Create your Will and update nominees']
                     ]
                 };
@@ -481,7 +579,7 @@
                 heroClass = 'hero-yellow';
                 content = {
                     icon: '📈',
-                    text: "You've made a good start with your retirement planning. However, key areas like emergency funds, tax planning, or investment mix need attention. Fixing these now will give you much better peace of mind and financial security in retirement.",
+                    text: 'You have made a good start with your retirement planning. However, key areas like emergency funds, tax planning, or investment mix need attention. Fixing these now will give you much better peace of mind and financial security in retirement.',
                     actions: [
                         ['Build Safety Net', 'Increase emergency funds to 5 years'],
                         ['Balance Investments', 'Review and adjust your portfolio mix'],
@@ -496,7 +594,7 @@
                 heroClass = 'hero-yellow';
                 content = {
                     icon: '✨',
-                    text: "You've built a solid foundation with smart decisions. Fine-tuning how you withdraw money, keeping some investments growing, and regularly reviewing your portfolio will take you from good to excellent retirement readiness.",
+                    text: 'You have built a solid foundation with smart decisions. Fine-tuning how you withdraw money, keeping some investments growing, and regularly reviewing your portfolio will take you from good to excellent retirement readiness.',
                     actions: [
                         ['Annual Review', 'Check your investments once a year'],
                         ['Keep Growing', 'Maintain 40%+ in growth investments'],
@@ -511,10 +609,10 @@
                 heroClass = 'hero-green';
                 content = {
                     icon: '🏆',
-                    text: "Excellent work! Your retirement plan shows discipline and smart thinking. You have enough savings, good diversification, and proper risk management. Now focus on getting better returns, reducing taxes, making your corpus last longer, and protecting against inflation.",
+                    text: 'Excellent work! Your retirement plan shows discipline and smart thinking. You have enough savings, good diversification, and proper risk management. Now focus on getting better returns, reducing taxes, making your corpus last longer, and protecting against inflation.',
                     actions: [
                         ['Better Returns', 'Improve investment performance safely'],
-                        ['Minimize Taxes', 'Optimize how much tax you\'ll pay'],
+                        ['Minimize Taxes', 'Optimize how much tax you will pay'],
                         ['Extend Corpus Life', 'Make your retirement fund last longer'],
                         ['Inflation Protection', 'Ensure purchasing power stays strong']
                     ]
@@ -526,7 +624,7 @@
                 heroClass = 'hero-green';
                 content = {
                     icon: '💎',
-                    text: "Outstanding! You're among the best-prepared retirees. You've covered all critical areas comprehensively. Your focus now is on maximizing returns, ensuring your corpus lasts through market cycles, advanced tax optimization, and protecting your wealth for the long term.",
+                    text: 'Outstanding! You are among the best-prepared retirees. You have covered all critical areas comprehensively. Your focus now is on maximizing returns, ensuring your corpus lasts through market cycles, advanced tax optimization, and protecting your wealth for the long term.',
                     actions: [
                         ['Maximize Returns', 'Optimize portfolio for better risk-adjusted returns'],
                         ['Corpus Longevity', 'Ensure your money lasts 30+ years'],
@@ -536,51 +634,96 @@
                 };
             }
             
-            let actionsHTML = '';
-            for (let i = 0; i < content.actions.length; i++) {
+            var actionsHTML = '';
+            for (var i = 0; i < content.actions.length; i++) {
                 actionsHTML += '<div class="action-item"><strong>' + content.actions[i][0] + '</strong>' + content.actions[i][1] + '</div>';
             }
             
-            app.innerHTML = `
-                <div class="screen active result-screen">
-                    <div class="results-hero ${heroClass}">
-                        <div class="score-display">
-                            <div class="score-circle score-${colorClass}">
-                                <div class="score-number">${score}</div>
-                                <div class="score-outof">out of 100</div>
-                            </div>
-                            <div class="score-info">
-                                <div class="score-label">YOUR MRRS SCORE</div>
-                                <div class="score-category">${cat}</div>
-                                <div class="score-recommendation">${rec}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="results-body">
-                        <div class="insight-card ${colorClass}">
-                            <div class="insight-title">
-                                <span>${content.icon}</span>
-                                <span>What This Means For You</span>
-                            </div>
-                            <p class="insight-text">${content.text}</p>
-                        </div>
-                        <div class="action-grid">${actionsHTML}</div>
-                        <div class="user-info-compact">
-                            <div><div class="label">Name</div><div class="value">${userData.name}</div></div>
-                            <div><div class="label">Phone</div><div class="value">${userData.phone}</div></div>
-                            <div><div class="label">Age</div><div class="value">${userData.age}</div></div>
-                        </div>
-                        <div class="cta-section">
-                            <p><strong>Get a FREE personalized roadmap</strong> to fix gaps, maximize returns, and retire confidently—built specifically for your situation</p>
-                            <button class="btn btn-primary" style="width: 100%;" onclick="requestReview(${score}, '${rec}')">📞 Get My FREE Retirement Roadmap</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+            var retirementFact = getRetirementFact(score);
+            
+            app.innerHTML = '<div class="screen active result-screen">' +
+                '<div class="results-hero ' + heroClass + '">' +
+                '<div class="score-display">' +
+                '<div class="score-circle score-' + colorClass + '">' +
+                '<div class="score-number">' + score + '</div>' +
+                '<div class="score-outof">out of 100</div>' +
+                '</div>' +
+                '<div class="score-info">' +
+                '<div class="score-label">YOUR MRR SCORE</div>' +
+                '<div class="score-category">' + cat + '</div>' +
+                '<div class="score-recommendation">' + rec + '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="results-body">' +
+                '<div class="stats-banner">' +
+                '<h3>💡 Retirement Planning Insight</h3>' +
+                '<p>' + retirementFact + '</p>' +
+                '</div>' +
+                '<div class="insight-card ' + colorClass + '">' +
+                '<div class="insight-title">' +
+                '<span>' + content.icon + '</span>' +
+                '<span>What This Means For You</span>' +
+                '</div>' +
+                '<p class="insight-text">' + content.text + '</p>' +
+                '</div>' +
+                '<div class="action-grid">' + actionsHTML + '</div>' +
+                '<div class="user-info-compact">' +
+                '<div><div class="label">Name</div><div class="value">' + userData.name + '</div></div>' +
+                '<div><div class="label">Phone</div><div class="value">' + userData.phone + '</div></div>' +
+                '<div><div class="label">Age</div><div class="value">' + userData.age + '</div></div>' +
+                '</div>' +
+                '<div class="cta-section">' +
+                '<p><strong>Get a FREE personalized roadmap</strong> to fix gaps, maximize returns, and retire confidently—built specifically for your situation</p>' +
+                '<button class="btn btn-primary" style="width: 100%;" onclick="showMightyScreen()">📞 Get My FREE Retirement Roadmap</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+        
+        function getRetirementFact(score) {
+            if (score <= 30) {
+                return '<strong>Did you know?</strong> Indians need <strong>25-30x</strong> their annual expenses for retirement, but <strong>60% have no retirement plan</strong>. Starting now gives you the advantage of compounding.';
+            } else if (score <= 50) {
+                return '<strong>Studies show</strong> that <strong>72% of retirees</strong> underestimate healthcare costs. A proper plan includes <strong>₹50-75 lakhs</strong> for medical expenses over 25 years.';
+            } else if (score <= 70) {
+                return '<strong>Inflation insight:</strong> At <strong>6% inflation</strong>, your retirement corpus loses <strong>50% purchasing power in 12 years</strong>. Keep 40%+ in growth assets.';
+            } else if (score <= 85) {
+                return '<strong>Tax efficiency matters:</strong> Smart withdrawal strategies can save <strong>₹15-25 lakhs</strong> in taxes over your retirement. Optimize across all income streams.';
+            } else {
+                return '<strong>Wealth preservation:</strong> Top 5% of retirees maintain <strong>equity exposure of 40-50%</strong> throughout retirement to beat inflation and extend corpus longevity.';
+            }
+        }
+        
+        function showMightyScreen() {
+            app.innerHTML = '<div class="screen active mighty-final">' +
+                '<div class="mighty-logo">MIGHTY</div>' +
+                '<div class="mighty-tagline">India\'s Trusted Retirement Planning Partner</div>' +
+                '<div class="impact-stats">' +
+                '<div class="stat-card">' +
+                '<div class="stat-number">₹100+ Cr</div>' +
+                '<div class="stat-label">Retirement corpus invested through our guidance</div>' +
+                '</div>' +
+                '<div class="stat-card">' +
+                '<div class="stat-number">3,000+</div>' +
+                '<div class="stat-label">Free retirement planning sessions delivered — equivalent to <strong>₹1.5 crore</strong> of professional advisory value</div>' +
+                '</div>' +
+                '<div class="stat-card">' +
+                '<div class="stat-number">20,000+</div>' +
+                '<div class="stat-label">People registered for our masterclass webinar on retirement planning</div>' +
+                '</div>' +
+                '</div>' +
+                '<a href="https://www.getmighty.in" target="_blank" class="website-link">🌐 Visit www.getmighty.in</a>' +
+                '<div class="thank-you-note">' +
+                '<p><strong>Thank you, ' + userData.name + '!</strong></p>' +
+                '<p>Our retirement planning expert will contact you at <strong>' + userData.phone + '</strong> within 24 hours with your personalized retirement roadmap.</p>' +
+                '<p style="margin-top: 15px; color: #667eea; font-weight: 600;">We\'re committed to helping you retire with confidence.</p>' +
+                '</div>' +
+                '</div>';
         }
         
         function requestReview(score, rec) {
-            alert('Thank you, ' + userData.name + '! 🎯\n\nYour MRRS Score: ' + score + ' out of 100\n\nOur retirement planning expert will contact you at ' + userData.phone + ' within 24 hours.\n\nWhat you\'ll receive:\n✓ Detailed analysis of your 12-point assessment\n✓ Personalized ' + rec + '\n✓ Priority action roadmap\n✓ Expert guidance (no-obligation consultation)\n\nWe\'re committed to helping you achieve retirement confidence!');
+            showMightyScreen();
         }
         
         showIntro();
