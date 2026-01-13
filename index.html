@@ -17,6 +17,10 @@
             padding: 20px;
         }
         
+        .scroll-to-top {
+            scroll-behavior: smooth;
+        }
+        
         .container {
             background: white;
             border-radius: 20px;
@@ -236,32 +240,33 @@
         .results-body { padding: 30px; }
         
         .stats-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
-            padding: 25px 20px;
+            padding: 20px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 25px;
+            text-align: left;
+            border-left: 4px solid #fbbf24;
         }
         
         .stats-banner h3 {
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             opacity: 0.9;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
         
         .stats-banner p {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.7;
             opacity: 0.95;
         }
         
         .stats-banner strong {
-            font-size: 18px;
             font-weight: 700;
+            color: #fbbf24;
         }
         
         .insight-card {
@@ -346,19 +351,71 @@
             padding: 40px 30px;
         }
         
-        .mighty-logo {
-            font-size: 32px;
+        .confirmation-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .confirmation-box h2 {
+            font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .confirmation-box p {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        .mighty-branding {
+            margin-bottom: 30px;
+        }
+        
+        .mighty-logo-img {
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto 15px;
+        }
+        
+        .mighty-logo {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
         }
         
         .mighty-tagline {
-            font-size: 14px;
-            color: #6c757d;
+            font-size: 16px;
+            color: #667eea;
             margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .value-prop {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .value-prop h3 {
+            font-size: 20px;
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .value-prop p {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.7;
         }
         
         .impact-stats {
@@ -377,16 +434,50 @@
         }
         
         .stat-number {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             color: #667eea;
             margin-bottom: 8px;
         }
         
         .stat-label {
-            font-size: 15px;
+            font-size: 14px;
             color: #495057;
             line-height: 1.5;
+        }
+        
+        .testimonials {
+            margin-bottom: 30px;
+        }
+        
+        .testimonials h3 {
+            font-size: 18px;
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 3px solid #667eea;
+        }
+        
+        .testimonial-card p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.7;
+            font-style: italic;
+        }
+        
+        .testimonial-card .quote-icon {
+            color: #667eea;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         
         .website-link {
@@ -469,6 +560,7 @@
         ];
         
         function showIntro() {
+            window.scrollTo(0, 0);
             app.innerHTML = '<div class="screen active intro-screen">' +
                 '<div class="intro-icon">🎯</div>' +
                 '<h2>Welcome to Your Retirement Readiness Assessment</h2>' +
@@ -549,6 +641,7 @@
         }
         
         function showResults() {
+            window.scrollTo(0, 0);
             var total = 0;
             for (var i = 0; i < answers.length; i++) {
                 total += answers[i];
@@ -639,8 +732,6 @@
                 actionsHTML += '<div class="action-item"><strong>' + content.actions[i][0] + '</strong>' + content.actions[i][1] + '</div>';
             }
             
-            var retirementFact = getRetirementFact(score);
-            
             app.innerHTML = '<div class="screen active result-screen">' +
                 '<div class="results-hero ' + heroClass + '">' +
                 '<div class="score-display">' +
@@ -656,10 +747,6 @@
                 '</div>' +
                 '</div>' +
                 '<div class="results-body">' +
-                '<div class="stats-banner">' +
-                '<h3>💡 Retirement Planning Insight</h3>' +
-                '<p>' + retirementFact + '</p>' +
-                '</div>' +
                 '<div class="insight-card ' + colorClass + '">' +
                 '<div class="insight-title">' +
                 '<span>' + content.icon + '</span>' +
@@ -668,6 +755,10 @@
                 '<p class="insight-text">' + content.text + '</p>' +
                 '</div>' +
                 '<div class="action-grid">' + actionsHTML + '</div>' +
+                '<div class="stats-banner">' +
+                '<h3>💡 India Retirement Reality Check</h3>' +
+                '<p><strong>Average Indian lifespan: 70+ years.</strong> Most people retire at 60, meaning your retirement corpus must last <strong>10-15 years minimum</strong>—often longer. With <strong>6-7% inflation</strong>, healthcare costs rising <strong>12-15% annually</strong>, and no social security safety net, Indians need <strong>25-30x their annual expenses</strong> saved. Only <strong>30% of Indians</strong> have a formal retirement plan.</p>' +
+                '</div>' +
                 '<div class="user-info-compact">' +
                 '<div><div class="label">Name</div><div class="value">' + userData.name + '</div></div>' +
                 '<div><div class="label">Phone</div><div class="value">' + userData.phone + '</div></div>' +
@@ -682,23 +773,40 @@
         }
         
         function getRetirementFact(score) {
-            if (score <= 30) {
-                return '<strong>Did you know?</strong> Indians need <strong>25-30x</strong> their annual expenses for retirement, but <strong>60% have no retirement plan</strong>. Starting now gives you the advantage of compounding.';
-            } else if (score <= 50) {
-                return '<strong>Studies show</strong> that <strong>72% of retirees</strong> underestimate healthcare costs. A proper plan includes <strong>₹50-75 lakhs</strong> for medical expenses over 25 years.';
-            } else if (score <= 70) {
-                return '<strong>Inflation insight:</strong> At <strong>6% inflation</strong>, your retirement corpus loses <strong>50% purchasing power in 12 years</strong>. Keep 40%+ in growth assets.';
-            } else if (score <= 85) {
-                return '<strong>Tax efficiency matters:</strong> Smart withdrawal strategies can save <strong>₹15-25 lakhs</strong> in taxes over your retirement. Optimize across all income streams.';
-            } else {
-                return '<strong>Wealth preservation:</strong> Top 5% of retirees maintain <strong>equity exposure of 40-50%</strong> throughout retirement to beat inflation and extend corpus longevity.';
-            }
+            return '<strong>Average Indian lifespan: 70+ years.</strong> Most retire at 60, meaning your corpus must last <strong>10-15 years minimum</strong>. With <strong>6-7% inflation</strong> and healthcare costs rising <strong>12-15% annually</strong>, Indians need <strong>25-30x annual expenses</strong> saved.';
         }
         
         function showMightyScreen() {
+            window.scrollTo(0, 0);
             app.innerHTML = '<div class="screen active mighty-final">' +
-                '<div class="mighty-logo">MIGHTY</div>' +
+                '<div class="confirmation-box">' +
+                '<h2>✓ Request Confirmed!</h2>' +
+                '<p><strong>' + userData.name + '</strong>, thank you for taking the first step toward a secure retirement.</p>' +
+                '<p style="margin-top: 10px;">Our expert will call you at <strong>' + userData.phone + '</strong> within 24 hours with your personalized retirement roadmap.</p>' +
+                '</div>' +
+                '<div class="mighty-branding">' +
+                '<div class="mighty-logo">mighty</div>' +
                 '<div class="mighty-tagline">India\'s Trusted Retirement Planning Partner</div>' +
+                '</div>' +
+                '<div class="value-prop">' +
+                '<h3>Why 20,000+ Indians Trust Mighty</h3>' +
+                '<p>We cut through the noise and deliver expert-led, goal-based retirement planning that actually works—with clarity, coordination, and zero confusion.</p>' +
+                '</div>' +
+                '<div class="testimonials">' +
+                '<h3>What Our Customers Say</h3>' +
+                '<div class="testimonial-card">' +
+                '<div class="quote-icon">"</div>' +
+                '<p>Finally, someone who made sense of all the conflicting advice online. The clarity and structure they provided gave me real peace of mind about my retirement.</p>' +
+                '</div>' +
+                '<div class="testimonial-card">' +
+                '<div class="quote-icon">"</div>' +
+                '<p>I was overwhelmed with options and misinformation. Their goal-based approach and expert guidance simplified everything and gave me confidence in my plan.</p>' +
+                '</div>' +
+                '<div class="testimonial-card">' +
+                '<div class="quote-icon">"</div>' +
+                '<p>The entire experience was seamless and well-coordinated. From the first consultation to ongoing support, they made retirement planning feel achievable.</p>' +
+                '</div>' +
+                '</div>' +
                 '<div class="impact-stats">' +
                 '<div class="stat-card">' +
                 '<div class="stat-number">₹100+ Cr</div>' +
@@ -706,18 +814,16 @@
                 '</div>' +
                 '<div class="stat-card">' +
                 '<div class="stat-number">3,000+</div>' +
-                '<div class="stat-label">Free retirement planning sessions delivered — equivalent to <strong>₹1.5 crore</strong> of professional advisory value</div>' +
+                '<div class="stat-label">Free retirement planning sessions delivered—equivalent to <strong>₹1.5 crore</strong> of professional advisory value</div>' +
                 '</div>' +
                 '<div class="stat-card">' +
                 '<div class="stat-number">20,000+</div>' +
                 '<div class="stat-label">People registered for our masterclass webinar on retirement planning</div>' +
                 '</div>' +
                 '</div>' +
-                '<a href="https://getmighty.in/" target="_blank" class="website-link">🌐 Visit Mighty</a>' +
+                '<a href="https://www.getmighty.in" target="_blank" class="website-link">🌐 Visit www.getmighty.in</a>' +
                 '<div class="thank-you-note">' +
-                '<p><strong>Thank you, ' + userData.name + '!</strong></p>' +
-                '<p>Our retirement planning expert will contact you at <strong>' + userData.phone + '</strong> within 24 hours with your personalized retirement roadmap.</p>' +
-                '<p style="margin-top: 15px; color: #667eea; font-weight: 600;">We\'re committed to helping you retire with confidence.</p>' +
+                '<p style="margin-top: 25px; color: #667eea; font-weight: 600;">We\'re committed to helping you retire with confidence.</p>' +
                 '</div>' +
                 '</div>';
         }
