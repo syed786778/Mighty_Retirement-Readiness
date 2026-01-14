@@ -7,6 +7,8 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -15,10 +17,6 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-        }
-        
-        .scroll-to-top {
-            scroll-behavior: smooth;
         }
         
         .container {
@@ -239,36 +237,6 @@
         
         .results-body { padding: 30px; }
         
-        .stats-banner {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            text-align: left;
-            border-left: 4px solid #fbbf24;
-        }
-        
-        .stats-banner h3 {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .stats-banner p {
-            font-size: 15px;
-            line-height: 1.7;
-            opacity: 0.95;
-        }
-        
-        .stats-banner strong {
-            font-weight: 700;
-            color: #fbbf24;
-        }
-        
         .insight-card {
             background: #f8f9fa;
             padding: 20px;
@@ -314,6 +282,36 @@
             color: #667eea;
             font-size: 14px;
             margin-bottom: 6px;
+        }
+        
+        .stats-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .stats-banner h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .stats-banner p {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        .stats-banner strong {
+            font-weight: 700;
+            color: #fbbf24;
         }
         
         .user-info-compact {
@@ -376,14 +374,8 @@
             margin-bottom: 30px;
         }
         
-        .mighty-logo-img {
-            max-width: 200px;
-            height: auto;
-            margin: 0 auto 15px;
-        }
-        
         .mighty-logo {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 8px;
@@ -418,34 +410,6 @@
             line-height: 1.7;
         }
         
-        .impact-stats {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: left;
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 8px;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: #495057;
-            line-height: 1.5;
-        }
-        
         .testimonials {
             margin-bottom: 30px;
         }
@@ -478,6 +442,34 @@
             color: #667eea;
             font-size: 24px;
             margin-bottom: 10px;
+        }
+        
+        .impact-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #495057;
+            line-height: 1.5;
         }
         
         .website-link {
@@ -772,10 +764,6 @@
                 '</div>';
         }
         
-        function getRetirementFact(score) {
-            return '<strong>Average Indian lifespan: 70+ years.</strong> Most retire at 60, meaning your corpus must last <strong>10-15 years minimum</strong>. With <strong>6-7% inflation</strong> and healthcare costs rising <strong>12-15% annually</strong>, Indians need <strong>25-30x annual expenses</strong> saved.';
-        }
-        
         function showMightyScreen() {
             window.scrollTo(0, 0);
             app.innerHTML = '<div class="screen active mighty-final">' +
@@ -823,13 +811,9 @@
                 '</div>' +
                 '<a href="https://www.getmighty.in" target="_blank" class="website-link">🌐 Visit www.getmighty.in</a>' +
                 '<div class="thank-you-note">' +
-                '<p style="margin-top: 25px; color: #667eea; font-weight: 600;">We\'re committed to helping you retire with confidence.</p>' +
+                '<p style="margin-top: 25px; color: #667eea; font-weight: 600;">We are committed to helping you retire with confidence.</p>' +
                 '</div>' +
                 '</div>';
-        }
-        
-        function requestReview(score, rec) {
-            showMightyScreen();
         }
         
         showIntro();
