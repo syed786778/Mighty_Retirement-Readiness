@@ -317,6 +317,7 @@
         .user-info-compact {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             background: white;
             border: 2px solid #e9ecef;
             padding: 15px;
@@ -324,7 +325,17 @@
             margin-bottom: 20px;
         }
         
-        .user-info-compact div { text-align: center; flex: 1; }
+        .user-info-compact .info-grid {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        .user-info-compact .info-item {
+            text-align: left;
+            flex: 1;
+        }
+        
         .user-info-compact .label {
             color: #6c757d;
             font-size: 11px;
@@ -333,7 +344,88 @@
             font-weight: 600;
         }
         
-        .user-info-compact .value { color: #212529; font-weight: 700; font-size: 15px; }
+        .user-info-compact .value { 
+            color: #212529; 
+            font-weight: 700; 
+            font-size: 15px;
+        }
+        
+        .edit-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .edit-btn:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+        
+        .edit-form {
+            display: none;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .edit-form.active {
+            display: block;
+        }
+        
+        .edit-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .edit-form input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .edit-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .edit-form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .save-btn {
+            flex: 1;
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .cancel-btn {
+            flex: 1;
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
         
         .cta-section {
             background: linear-gradient(to bottom, rgba(102, 126, 234, 0.05), rgba(102, 126, 234, 0.1));
@@ -541,7 +633,7 @@
             "Does your total retirement corpus today equal at least 25× your expected annual retirement expenses?",
             "Do you have a separate liquid buffer equal to at least 5 years of expenses, kept aside from your main retirement investments?",
             "Will your pension, rent, FD/annuity interest and other predictable income sources cover at least 40% of your expected monthly retirement expenses? (Example: If expenses are ₹50,000, predictable income should be ₹20,000 or more)",
-            "Is less than 40% of your total net worth locked into one single asset class (property, business, one stock, etc.)?",
+            "Is less than 40% of your total net worth locked into one single asset class (property, business, one stock, MF etc.)?",
             "Can you access at least 3 years of expenses within 30 days without penalties or forced selling?",
             "Have you planned and calculated post-retirement tax impact on all your income streams?",
             "Do you have a registered Will and correct nominations across all assets?",
@@ -725,6 +817,16 @@
                 actionsHTML += '<div class="action-item"><strong>' + content.actions[i][0] + '</strong>' + content.actions[i][1] + '</div>';
             }
             
+            var retirementFacts = [
+                '<strong>The ₹1 Crore Reality:</strong> A corpus of ₹1 crore generates only <strong>₹40,000-50,000 monthly</strong> at 5-6% safe withdrawal rate. With inflation, this buys <strong>50% less in just 12 years</strong>. Most Indians vastly underestimate how much they actually need.',
+                '<strong>The Healthcare Time Bomb:</strong> Post-60 healthcare costs in India rise at <strong>12-15% annually</strong>—double the regular inflation rate. A ₹5 lakh medical emergency today will cost <strong>₹16 lakhs in 10 years</strong>. Yet only 18% of Indian retirees have adequate health coverage.',
+                '<strong>The Longevity Surprise:</strong> Indians retiring at 60 today have a <strong>50% chance of living past 80</strong>—that is 20+ years of retirement. Your money needs to last longer than you think, but <strong>70% of Indians plan for only 10-15 years</strong>.',
+                '<strong>The Real Estate Trap:</strong> <strong>65% of Indian wealth</strong> is locked in real estate—but you cannot pay grocery bills with property. Illiquid assets create cash flow problems. Balanced retirement needs <strong>40-50% in liquid, income-generating assets</strong>.',
+                '<strong>The Inflation Crusher:</strong> At 6% inflation, ₹1 lakh today will have the purchasing power of just <strong>₹55,000 in 10 years</strong> and <strong>₹31,000 in 20 years</strong>. Fixed deposits and traditional plans cannot beat this wealth erosion.'
+            ];
+            
+            var randomFact = retirementFacts[Math.floor(Math.random() * retirementFacts.length)];
+            
             app.innerHTML = '<div class="screen active result-screen">' +
                 '<div class="results-hero ' + heroClass + '">' +
                 '<div class="score-display">' +
@@ -749,13 +851,27 @@
                 '</div>' +
                 '<div class="action-grid">' + actionsHTML + '</div>' +
                 '<div class="stats-banner">' +
-                '<h3>💡 India Retirement Reality Check</h3>' +
-                '<p><strong>Average Indian lifespan: 70+ years.</strong> Most people retire at 60, meaning your retirement corpus must last <strong>10-15 years minimum</strong>—often longer. With <strong>6-7% inflation</strong>, healthcare costs rising <strong>12-15% annually</strong>, and no social security safety net, Indians need <strong>25-30x their annual expenses</strong> saved. Only <strong>30% of Indians</strong> have a formal retirement plan.</p>' +
+                '<h3>💡 Retirement Reality Check</h3>' +
+                '<p>' + randomFact + '</p>' +
                 '</div>' +
-                '<div class="user-info-compact">' +
-                '<div><div class="label">Name</div><div class="value">' + userData.name + '</div></div>' +
-                '<div><div class="label">Phone</div><div class="value">' + userData.phone + '</div></div>' +
-                '<div><div class="label">Age</div><div class="value">' + userData.age + '</div></div>' +
+                '<div class="user-info-compact" id="userInfoDisplay">' +
+                '<div class="info-grid">' +
+                '<div class="info-item"><div class="label">Name</div><div class="value">' + userData.name + '</div></div>' +
+                '<div class="info-item"><div class="label">Phone</div><div class="value">' + userData.phone + '</div></div>' +
+                '<div class="info-item"><div class="label">Age</div><div class="value">' + userData.age + '</div></div>' +
+                '</div>' +
+                '<button class="edit-btn" onclick="toggleEditForm()">✏️ Edit</button>' +
+                '</div>' +
+                '<div class="edit-form" id="editForm">' +
+                '<div class="edit-form-row">' +
+                '<div><label style="font-size: 12px; color: #6c757d; margin-bottom: 5px; display: block; font-weight: 600;">Name</label><input type="text" id="editName" value="' + userData.name + '"></div>' +
+                '<div><label style="font-size: 12px; color: #6c757d; margin-bottom: 5px; display: block; font-weight: 600;">Phone</label><input type="tel" id="editPhone" value="' + userData.phone + '"></div>' +
+                '</div>' +
+                '<div style="margin-bottom: 15px;"><label style="font-size: 12px; color: #6c757d; margin-bottom: 5px; display: block; font-weight: 600;">Age</label><input type="number" id="editAge" value="' + userData.age + '" min="40" max="100"></div>' +
+                '<div class="edit-form-buttons">' +
+                '<button class="save-btn" onclick="saveUserInfo()">✓ Save Changes</button>' +
+                '<button class="cancel-btn" onclick="toggleEditForm()">Cancel</button>' +
+                '</div>' +
                 '</div>' +
                 '<div class="cta-section">' +
                 '<p><strong>Get a FREE personalized roadmap</strong> to fix gaps, maximize returns, and retire confidently—built specifically for your situation</p>' +
@@ -763,6 +879,27 @@
                 '</div>' +
                 '</div>' +
                 '</div>';
+        }
+        
+        function toggleEditForm() {
+            var editForm = document.getElementById('editForm');
+            if (editForm.classList.contains('active')) {
+                editForm.classList.remove('active');
+            } else {
+                editForm.classList.add('active');
+            }
+        }
+        
+        function saveUserInfo() {
+            userData.name = document.getElementById('editName').value;
+            userData.phone = document.getElementById('editPhone').value;
+            userData.age = document.getElementById('editAge').value;
+            
+            document.querySelector('.info-item:nth-child(1) .value').textContent = userData.name;
+            document.querySelector('.info-item:nth-child(2) .value').textContent = userData.phone;
+            document.querySelector('.info-item:nth-child(3) .value').textContent = userData.age;
+            
+            toggleEditForm();
         }
         
         function showMightyScreen() {
@@ -779,7 +916,7 @@
                 '</div>' +
                 '<div class="value-prop">' +
                 '<h3>Expert-Led Retirement Planning That Works</h3>' +
-                '<p>We cut through the noise and deliver customised and research-backed retirement planning with clarity, coordination, and zero confusion-helping you make informed decisions for your future.</p>' +
+                '<p>We cut through the noise and deliver goal-based retirement planning with clarity, coordination, and zero confusion—helping you make informed decisions for your future.</p>' +
                 '</div>' +
                 '<div class="testimonials">' +
                 '<h3>Real feedback from people like you</h3>' +
@@ -789,7 +926,7 @@
                 '</div>' +
                 '<div class="testimonial-card">' +
                 '<div class="testimonial-rating">★★★★★</div>' +
-                '<p>"I thought I had it figured out with YouTube and Reddit advice. Turns out I was making costly mistakes. They showed me exactly what I was missing-and fixed it without making me feel stupid."</p>' +
+                '<p>"I thought I had it figured out with YouTube and Reddit advice. Turns out I was making costly mistakes. They showed me exactly what I was missing—and fixed it without making me feel stupid."</p>' +
                 '</div>' +
                 '<div class="testimonial-card">' +
                 '<div class="testimonial-rating">★★★★★</div>' +
@@ -803,14 +940,14 @@
                 '</div>' +
                 '<div class="stat-card">' +
                 '<div class="stat-number">3,000+</div>' +
-                '<div class="stat-label">Free retirement planning sessions delivered-equivalent to <strong>₹1.5 crore</strong> of professional advisory value</div>' +
+                '<div class="stat-label">Free retirement planning sessions delivered—equivalent to <strong>₹1.5 crore</strong> of professional advisory value</div>' +
                 '</div>' +
                 '<div class="stat-card">' +
                 '<div class="stat-number">20,000+</div>' +
                 '<div class="stat-label">People registered for our masterclass webinar on retirement planning</div>' +
                 '</div>' +
                 '</div>' +
-                '<a href="https://getmighty.in/" target="_blank" class="website-link">🌐 Explore Mighty</a>' +
+                '<a href="https://www.getmighty.in" target="_blank" class="website-link">🌐 Visit www.getmighty.in</a>' +
                 '<div class="thank-you-note">' +
                 '<p style="margin-top: 25px; color: #667eea; font-weight: 600;">We are committed to helping you retire with confidence.</p>' +
                 '</div>' +
