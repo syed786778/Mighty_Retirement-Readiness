@@ -589,6 +589,30 @@
             line-height: 1.7;
         }
         
+        .disclaimer {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: left;
+        }
+        
+        .disclaimer h4 {
+            font-size: 13px;
+            color: #856404;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .disclaimer p {
+            font-size: 12px;
+            color: #856404;
+            line-height: 1.6;
+        }
+        
         @media (max-width: 767px) {
             .score-display { flex-direction: column; gap: 20px; }
             .score-info { text-align: center; max-width: 100%; }
@@ -633,7 +657,7 @@
             "Does your total retirement corpus today equal at least 25× your expected annual retirement expenses?",
             "Do you have a separate liquid buffer equal to at least 5 years of expenses, kept aside from your main retirement investments?",
             "Will your pension, rent, FD/annuity interest and other predictable income sources cover at least 40% of your expected monthly retirement expenses? (Example: If expenses are ₹50,000, predictable income should be ₹20,000 or more)",
-            "Is less than 40% of your total net worth locked into one single asset class (property, business, one stock, MF etc.)?",
+            "Is less than 40% of your total net worth locked into one single asset class (property, business, one stock, etc.)?",
             "Can you access at least 3 years of expenses within 30 days without penalties or forced selling?",
             "Have you planned and calculated post-retirement tax impact on all your income streams?",
             "Do you have a registered Will and correct nominations across all assets?",
@@ -658,6 +682,10 @@
                 '</div>' +
                 '<p style="margin-top: 25px; color: #212529; font-weight: 600;">Ready to find out your Retirement Readiness Score?</p>' +
                 '<button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="startQuiz()">Start Assessment →</button>' +
+                '<div class="disclaimer">' +
+                '<h4>⚠️ Disclaimer</h4>' +
+                '<p>This assessment provides an indicative evaluation based on your responses and is not financial advice, a retirement plan, or investment recommendation. Consult a qualified financial advisor before making investment decisions. Mutual funds and capital market investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p>' +
+                '</div>' +
                 '</div>';
         }
         
@@ -876,6 +904,10 @@
                 '<div class="cta-section">' +
                 '<p><strong>Get a FREE personalized roadmap</strong> to fix gaps, maximize returns, and retire confidently—built specifically for your situation</p>' +
                 '<button class="btn btn-primary" style="width: 100%;" onclick="showMightyScreen()">📞 Get My FREE Retirement Roadmap</button>' +
+                '<div class="disclaimer" style="margin-top: 20px;">' +
+                '<h4>⚠️ Disclaimer</h4>' +
+                '<p>This assessment provides an indicative evaluation based on your responses and is not financial advice, a retirement plan, or investment recommendation. Consult a qualified financial advisor before making investment decisions. Mutual funds and capital market investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p>' +
+                '</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -947,9 +979,13 @@
                 '<div class="stat-label">People registered for our masterclass webinar on retirement planning</div>' +
                 '</div>' +
                 '</div>' +
-                '<a href="https://getmighty.in" target="_blank" class="website-link">🌐 Explore Mighty</a>' +
+                '<a href="https://getmighty.in/" target="_blank" class="website-link">🌐 Explore Mighty</a>' +
                 '<div class="thank-you-note">' +
                 '<p style="margin-top: 25px; color: #667eea; font-weight: 600;">We are committed to helping you retire with confidence.</p>' +
+                '</div>' +
+                '<div class="disclaimer" style="margin-top: 20px;">' +
+                '<h4>⚠️ Disclaimer</h4>' +
+                '<p>This assessment provides an indicative evaluation based on your responses and is not financial advice, a retirement plan, or investment recommendation. Consult a qualified financial advisor before making investment decisions. Mutual funds and capital market investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p>' +
                 '</div>' +
                 '</div>';
         }
